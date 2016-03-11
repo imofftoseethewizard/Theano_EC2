@@ -21,11 +21,11 @@ Get the setup script by running:
 
 And run this script via:
 
-    cd ./Theano_EC2/ && sudo sh setup.sh
+    cd ./keras_EC2/ && sudo sh setup.sh
 
-## Activate CUDA and test Theano ##
+## Test Theano ##
 
-Create the cuda device drivers by running the startup script:
+Create the cuda device drivers by running the startup script (not required on the Altoros AMI):
 
     sudo sh cuda_startup.sh
 
