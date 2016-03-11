@@ -16,9 +16,11 @@ sudo yum -y install \
 sudo yum -y install \
 	python-devel \
 	python-setuptools \
-	python-nose \
 	python-pip
 
 # install theano
-# http://deeplearning.net/software/theano/install_centos6.html
-sudo pip install Theano nose
+sudo pip install nose
+sudo pip install git+git://github.com/Theano/Theano.git
+
+
+
