@@ -18,9 +18,19 @@ sudo yum -y install \
 	python-setuptools \
 	python-pip
 
+sudo yum -y install \
+	python34-devel \
+	python34-setuptools \
+	python34-pip
+
 # install theano
 sudo pip install nose
 sudo pip install git+git://github.com/Theano/Theano.git
+sudo pip install keras
+
+sudo pip-3.4 install nose
+sudo pip-3.4 install git+git://github.com/Theano/Theano.git
+sudo pip-3.4 install keras
 
 
 

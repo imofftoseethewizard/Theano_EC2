@@ -5,11 +5,12 @@ Script to run on an Amazon EC2 instance with a GPU to set up keras backed by The
 
 ## Startup an Amazon EC2 instance ##
 
-Search for the [*Amazon Linux AMI with NVIDIA GRID GPU Driver*](https://aws.amazon.com/marketplace/pp/B00FYCDDTE) AMI by Nvidia, or the
-[*Amazon Linux x64 AMI with TensorFlow (GPU)*](https://aws.amazon.com/marketplace/pp/B01AOE205O) AMI by Altoros on the AWS marketplace.
+Search for the 
+[*Amazon Linux x64 AMI with TensorFlow (GPU)*](https://aws.amazon.com/marketplace/pp/B01AOE205O)
+AMI by Altoros in the AWS marketplace.
 Launch one of these AMIs on a GPU instance (e.g. *g2.2xlarge*).
 
-## Install Theano ##
+## Install Theano and Keras ##
 
 SSH into the shell of the newly created instance, and install git via:
 
