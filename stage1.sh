@@ -1,3 +1,4 @@
+#! /bin/bash
 
 # fetch the ubuntu package definitions from nvidia, for example
 #   cd downloads

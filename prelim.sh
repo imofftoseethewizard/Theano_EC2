@@ -1,3 +1,5 @@
+#! /bin/bash
+
 apt-get update
 apt-get -y dist-upgrade
 sudo apt-get install -y \
