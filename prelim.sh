@@ -27,5 +27,5 @@ sudo pip install \
     pytest-cov \
     pytest-xdist \
     cython \
-    hd5py
+    h5py
     
