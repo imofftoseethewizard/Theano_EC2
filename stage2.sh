@@ -53,15 +53,39 @@ EOF
 fi
 
 pushd repos
-rm -rf keras Theano
-git clone https://github.com/NVIDIA/cnmem.git
-git clone git@github.com:fchollet/keras.git
-git clone git@github.com:Theano/Theano.git
+
+if [ ! -d cnmem ] ; then
+    git clone https://github.com/NVIDIA/cnmem.git
+else
+    pushd cnmem
+    git checkout master
+    git pull
+    popd
+fi
+
+if [ ! -d keras ] ; then
+    git clone https://github.com/NVIDIA/keras.git
+else
+    pushd keras
+    git checkout master
+    git pull
+    popd
+fi
+
+if [ ! -d Theano ] ; then
+    git clone https://github.com/NVIDIA/Theano.git
+else
+    pushd Theano
+    git checkout master
+    git pull
+    popd
+fi
+
 popd
 
 # ensure $CUDA_ROOT/bin is in the path, required to build pycuda.
 # CUDA_HOME and LD_LIBRARY_PATH are required for building cnmem
-source .profile 
+source ~/.profile 
 
 pushd repos/cnmem
 mkdir build

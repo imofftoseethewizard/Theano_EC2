@@ -14,7 +14,7 @@ popd
 
 cd repos
 
-pushd cnmem
+pushd cnmem/build
 make install
 popd
 

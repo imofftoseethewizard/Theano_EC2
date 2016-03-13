@@ -47,6 +47,9 @@ Now install pycuda, Theano, and keras
 
     sudo ./stage3.sh
 
+At this point, you can snapshot the instance and create an AMI. These scripts are idempotent,
+so you can re-run them at any time to update.
+
 ## Test Theano ##
 
 Create the cuda device drivers by running the startup script (not required on the Altoros AMI):
