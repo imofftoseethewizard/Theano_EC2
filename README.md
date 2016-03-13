@@ -1,4 +1,4 @@
-# Amazon EC2 Theano instance #
+# Amazon EC2 keras/Theano instance #
 
 Script to run on an Amazon EC2 instance with a GPU to set up keras backed by Theano.
 The scripts started with Markus Beissinger's post 
@@ -7,7 +7,8 @@ The scripts started with Markus Beissinger's post
 Berkeley Vision and Learning Center's wiki
 [Install Caffe on AWS from scratch]
 (https://github.com/BVLC/caffe/wiki/Install-Caffe-on-EC2-from-scratch-(Ubuntu,-CUDA-7,-cuDNN)).
-In addtion there were a lot of random bits [stack overflow](http://stackoverflow.com).
+In addtion there were a lot of random bits [stack overflow](http://stackoverflow.com). You should
+be able to run keras in both Python 2.7 and Python 3.4 after completing these steps.
 
 ## Launch Instance ##
 

@@ -14,6 +14,10 @@ popd
 
 cd repos
 
+pushd cnmem
+make install
+popd
+
 pushd Theano
 pip install --upgrade --no-deps .
 pip3 install --upgrade --no-deps .
