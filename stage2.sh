@@ -52,10 +52,34 @@ EOF
 
 fi
 
-cd repos
+pushd repos
 rm -rf keras Theano
 git clone git@github.com:fchollet/keras.git
 git clone git@github.com:Theano/Theano.git
+popd
 
-echo 'Reboot and run stage3.sh to install build pycuda.'
-echo 'Stage 3 produces a lot of compiler warnings. That seems to be normal.'
+#ensure $CUDA_ROOT/bin is in the path, required to build pycuda
+source .profile 
+
+pushd archives
+rm -f pycuda*
+wget https://pypi.python.org/packages/source/p/pycuda/pycuda-2016.1.tar.gz#md5=96e50fd4b079d4f6e8bd1bd2207ca48d
+md5=`md5sum pycuda-2016.1.tar.gz | awk '{ print $1 }'`
+
+if [ $md5 != "96e50fd4b079d4f6e8bd1bd2207ca48d" ] ; then
+    echo 'Pycuda archive checksum does not match'.
+
+    exit 1
+fi
+popd
+
+pushd build
+tar xfz ../archives/pycuda-2016.1.tar.gz
+popd
+
+pushd build/pycuda-2016.1/
+python configure.py
+make 2>/dev/null
+popd
+
+echo 'Reboot and run stage3.sh as root install pycuda, Theano, and keras.'
