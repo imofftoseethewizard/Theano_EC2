@@ -64,7 +64,7 @@ else
 fi
 
 if [ ! -d keras ] ; then
-    git clone https://github.com/NVIDIA/keras.git
+    git clone git@github.com:fchollet/keras.git
 else
     pushd keras
     git checkout master
@@ -73,7 +73,7 @@ else
 fi
 
 if [ ! -d Theano ] ; then
-    git clone https://github.com/NVIDIA/Theano.git
+    git clone git@github.com:Theano/Theano.git
 else
     pushd Theano
     git checkout master
