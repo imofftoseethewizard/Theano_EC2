@@ -1,6 +1,13 @@
 # Amazon EC2 Theano instance #
 
 Script to run on an Amazon EC2 instance with a GPU to set up keras backed by Theano.
+The scripts started with Markus Beissinger's post 
+[How to install Theano on Amazon EC2 GPU instances for deep learning]
+(http://markus.com/install-theano-on-aws/) and then took some stuff from
+Berkeley Vision and Learning Center's wiki
+[Install Caffe on AWS from scratch]
+(https://github.com/BVLC/caffe/wiki/Install-Caffe-on-EC2-from-scratch-(Ubuntu,-CUDA-7,-cuDNN)).
+In addtion there were a lot of random bits [stack overflow](http://stackoverflow.com).
 
 ## Launch Instance ##
 
@@ -11,9 +18,9 @@ on a GPU instance (e.g. *g2.2xlarge*).
 
 ## Installation
 
-SSH into the shell of the newly created instance, and install git via
+SSH into the newly created instance, and install git via
 
-    sudo yum -y install git
+    sudo apt-get -y install git
 
 Get the setup scripts by running
 
@@ -22,7 +29,7 @@ Get the setup scripts by running
 Get the latest cudnn archive from Nvidia. You'll need to sign up as a developer for this.
 Then copy it to the archives subdirectory of this project
 
-     scp cudnn-7.0-linux-x64-v4.0-prod.tgz to keras_EC2/archives ubuntu@<instance>:keras_EC2/archives
+     scp cudnn-7.0-linux-x64-v4.0-prod.tgz ubuntu@<instance>:keras_EC2/archives
 
 Start by installing some standard packages with apt-get and pip in addition to the latest
 cuda packages from Nvidia. This takes about 15 minutes.
