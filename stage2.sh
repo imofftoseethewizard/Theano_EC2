@@ -1,5 +1,13 @@
 #! /bin/bash
 
+set -e
+# Any subsequent(*) commands which fail will cause the shell script to exit immediately
+
+if [[ $(/usr/bin/id -u) -eq 0 ]]; then
+    echo "Do not run this script as root."
+    exit
+fi
+
 if fgrep --quiet "# Added by keras_EC2 stage1.sh >>>>" ~/.profile; then
     echo '.profile not changed, verify that PATH and LD_LIBRARY_PATH include /usr/local/cuda/{bin,lib64}, respectively.'
 else
@@ -7,10 +15,12 @@ else
 
 # Added by keras_EC2 stage1.sh >>>>
 
-export CUDA_HOME=/usr/local/cuda
-export CUDA_ROOT=$CUDA_HOME
-export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
-export PATH=$PATH:$CUDO_HOME/bin
+export CUDA_ROOT=/usr/local/cuda
+export CUDA_HOME=\$CUDA_ROOT
+export CUDA_INC_DIR=\$CUDA_ROOT/include
+export LD_LIBRARY_PATH=\$CUDA_ROOT/lib64:\$LD_LIBRARY_PATH
+export PATH=\$PATH:\$CUDA_ROOT/bin
+
 
 # ^^^^ Added by keras_EC2 stage1.sh
 
@@ -42,4 +52,10 @@ EOF
 
 fi
 
-echo 'Reboot and run stage3.sh to install pycuda, theano, and keras.'
+cd repos
+rm -rf keras Theano
+git clone git@github.com:fchollet/keras.git
+git clone git@github.com:Theano/Theano.git
+
+echo 'Reboot and run stage3.sh to install build pycuda.'
+echo 'Stage 3 produces a lot of compiler warnings. That seems to be normal.'
