@@ -8,22 +8,16 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
-pushd build/pycuda-2016.1/
-make install
-popd
+(cd build/pycuda-2016.1/ ;
+    make install)
 
-cd repos
+(cd repos/cnmem/build ;
+    make install)
 
-pushd cnmem/build
-make install
-popd
+(cd repos/Theano ;
+    pip install --upgrade --no-deps . ;
+    pip3 install --upgrade --no-deps . )
 
-pushd Theano
-pip install --upgrade --no-deps .
-pip3 install --upgrade --no-deps .
-popd
-
-pushd keras
-pip install --upgrade --no-deps .
-pip3 install --upgrade --no-deps .
-popd
+(cd repos/keras ;
+    pip install --upgrade --no-deps . ;
+    pip3 install --upgrade --no-deps . )
