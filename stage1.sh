@@ -65,7 +65,7 @@ pip3 install \
 #
 # among other things.
 
-dpkg -i `ls packages`
+dpkg -i `find packages -name "*.deb"`
 apt-get update
 apt-get install -y cuda 
 
