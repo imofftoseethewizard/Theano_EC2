@@ -84,4 +84,16 @@ fi
 cp build/cuda/lib64/* /usr/local/cuda/lib64/
 cp build/cuda/include/cudnn.h /usr/local/cuda/include
 
-echo 'Run stage2.sh to set up .profile and .theanorc, and to clone the theano and keras repos.'
+if [ ! -e /etc/profile.d/cuda.sh ]; then
+    cat >> /etc/profile.d/cuda.sh <<EOF
+#! /bin/sh
+export CUDA_ROOT="/usr/local/cuda"
+export CUDA_HOME="\$CUDA_ROOT"
+export CUDA_INC_DIR="\$CUDA_ROOT/include"
+export LD_LIBRARY_PATH="\$CUDA_ROOT/lib64:\$LD_LIBRARY_PATH"
+export PATH="\$PATH:\$CUDA_ROOT/bin"
+
+EOF
+fi
+
+echo 'Run stage2.sh to set up .theanorc, and to clone the cnmem, theano, and keras repos.'

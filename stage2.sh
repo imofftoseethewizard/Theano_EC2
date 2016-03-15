@@ -8,25 +8,6 @@ if [[ $(/usr/bin/id -u) -eq 0 ]]; then
     exit
 fi
 
-if fgrep --quiet "# Added by keras_EC2 stage1.sh >>>>" ~/.profile; then
-    echo '.profile not changed, verify that PATH and LD_LIBRARY_PATH include /usr/local/cuda/{bin,lib64}, respectively.'
-else
-    cat >> ~/.profile <<EOF
-
-# Added by keras_EC2 stage1.sh >>>>
-
-export CUDA_ROOT=/usr/local/cuda
-export CUDA_HOME=\$CUDA_ROOT
-export CUDA_INC_DIR=\$CUDA_ROOT/include
-export LD_LIBRARY_PATH=\$CUDA_ROOT/lib64:\$LD_LIBRARY_PATH
-export PATH=\$PATH:\$CUDA_ROOT/bin
-
-
-# ^^^^ Added by keras_EC2 stage1.sh
-
-EOF
-fi
-
 touch ~/.theanorc
 
 if fgrep --quiet "# Added by keras_EC2 stage1.sh >>>>" ~/.theanorc; then
@@ -64,7 +45,7 @@ else
 fi
 
 if [ ! -d keras ] ; then
-    git clone git@github.com:fchollet/keras.git
+    git clone https://github.com/fchollet/keras.git
 else
     pushd keras
     git checkout master
@@ -73,7 +54,7 @@ else
 fi
 
 if [ ! -d Theano ] ; then
-    git clone git@github.com:Theano/Theano.git
+    git clone https://github.com/Theano/Theano.git
 else
     pushd Theano
     git checkout master
