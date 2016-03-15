@@ -37,6 +37,8 @@ apt-get install -y \
     cmake
 
 pip install \
+    awscli \
+    boto3 \
     pytest \
     pytest-cov \
     pytest-xdist \
@@ -44,16 +46,26 @@ pip install \
     h5py
 
 pip3 install \
+    awscli \
+    boto3 \
     pytest \
     pytest-cov \
     pytest-xdist \
     cython \
     h5py
 
-cd packages
-rm *
-wget http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1404/x86_64/cuda-repo-ubuntu1404_7.5-18_amd64.deb
-dpkg -i packages/*.deb
+# This will actually install X, gnome, etc. It may seem like a lot, but if you
+#
+# $ sudo apt-get install -y debtree
+# $ debtree cuda --no-recommends --no-alternatives --max-depth=7 | dot -Tpng -o cuda.png
+#
+# and look at the dependency graph, you'll see that
+#
+#   cuda-drivers -> nvidia-352 -> xserver-xorg-core
+#
+# among other things.
+
+dpkg -i `ls packages`
 apt-get update
 apt-get install -y cuda 
 
@@ -66,10 +78,10 @@ if [ ! -e archives/cudnn-7.0-linux-x64-v4.0-prod.tgz ] ; then
     exit 1
 fi
 
-cd build
-tar xfz ../archives/cudnn-7.0-linux-x64-v4.0-prod.tgz
-cd cuda
-cp lib64/* /usr/local/cuda/lib64/
-cp include/cudnn.h /usr/local/cuda/include
+(cd build;
+    tar xfz ../archives/cudnn-7.0-linux-x64-v4.0-prod.tgz)
+
+cp build/cuda/lib64/* /usr/local/cuda/lib64/
+cp build/cuda/include/cudnn.h /usr/local/cuda/include
 
 echo 'Run stage2.sh to set up .profile and .theanorc, and to clone the theano and keras repos.'
