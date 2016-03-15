@@ -3,6 +3,9 @@
 set -e
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
+# update path to so that installer for pycuda can find nvcc
+source /etc/profile.d/cuda.sh
+
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Run this script as root."
     exit
