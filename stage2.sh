@@ -17,15 +17,15 @@ else
 # Added by keras_EC2 stage1.sh >>>>
 
 [global]
-    floatX=float32
-    device=gpu
-    [mode]=FAST_RUN
+floatX=float32
+device=gpu
+mode=FAST_RUN
 
 [nvcc]
-    fastmath=True
+fastmath=True
 
 [cuda]
-    root=/usr/local/cuda"
+root=/usr/local/cuda
 
 # ^^^^ Added by keras_EC2 stage1.sh
 
