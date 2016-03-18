@@ -25,17 +25,17 @@ SSH into the newly created instance, and install git via
 
 Get the setup scripts by running
 
-    git clone https://github.com/imofftoseethewizard/keras_EC2.git
+    git clone https://github.com/imofftoseethewizard/ubuntu-keras.git
 
 Get the latest cudnn archive from Nvidia. You'll need to sign up as a developer for this.
 Then copy it to the archives subdirectory of this project
 
-     scp cudnn-7.0-linux-x64-v4.0-prod.tgz ubuntu@<instance>:keras_EC2/archives
+     scp cudnn-7.0-linux-x64-v4.0-prod.tgz ubuntu@<instance>:ubuntu-keras/archives
 
 Start by installing some standard packages with apt-get and pip in addition to the latest
 cuda packages from Nvidia. This takes about 15 minutes.
 
-    cd keras_EC2
+    cd ubuntu-keras
     sudo ./stage1.sh
 
 Next configure your .profile and .theanorc files, clone the Theano and keras repos,
@@ -50,12 +50,15 @@ Now install pycuda, Theano, and keras
 At this point, you can snapshot the instance and create an AMI. These scripts are idempotent,
 so you can re-run them at any time to update.
 
-## Test Theano ##
+## Testing
 
-Create the cuda device drivers by running the startup script (not required on the Altoros AMI):
+To test the installation,
 
-    sudo sh cuda_startup.sh
+    cd ubuntu-keras/repos
+    py.test
 
-Test the Theano installation by running:
-
-    sh test_theano.sh
+To test keras on the CPU, change your .theanorc file, and alter ubuntu-keras/repos/keras/pytest.ini
+so that the line
+"-n 2" is "-n <cores on your machine>". If you want to test on the GPU, make sure your
+.theanorc file specifies the GPU and remove the "-n" line from pytest.ini. It seems not to
+work very well when there are multiple processes trying to access the GPU at the same time.
