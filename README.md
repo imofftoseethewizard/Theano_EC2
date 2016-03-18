@@ -57,8 +57,8 @@ To test the installation,
     cd ubuntu-keras/repos
     py.test
 
-To test keras on the CPU, change your .theanorc file, and alter ubuntu-keras/repos/keras/pytest.ini
+To test keras on the CPU, change your .theanorc file to specify that theano uses the CPU, and alter ubuntu-keras/repos/keras/pytest.ini
 so that the line
-"-n 2" is "-n <cores on your machine>". If you want to test on the GPU, make sure your
+"-n 2" is "-n _cores on your machine_". If you want to test on the GPU, make sure your
 .theanorc file specifies the GPU and remove the "-n" line from pytest.ini. It seems not to
 work very well when there are multiple processes trying to access the GPU at the same time.
