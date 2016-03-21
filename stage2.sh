@@ -3,7 +3,21 @@
 set -e
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
-if [[ $(/usr/bin/id -u) -eq 0 ]]; then
+# allow -f to override the not-as-root check for use with the Dockerfile
+FORCE=no
+while getopts "f" opt; do
+    case $opt in
+        f)
+            FORCE=yes
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG; use -f to allow root execution." >&2
+            exit
+            ;;
+    esac
+done
+
+if [ $FORCE = "no" ] && [ $(/usr/bin/id -u) -eq 0 ]; then
     echo "Do not run this script as root."
     exit
 fi

@@ -8,6 +8,9 @@ if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     exit
 fi
 
+# For docker build.
+export DEBIAN_FRONTEND=noninteractive
+
 apt-get update
 apt-get -y dist-upgrade
 apt-get install -y \
@@ -66,7 +69,7 @@ pip3 install \
 # among other things.
 
 dpkg -i `find packages -name "*.deb"`
-apt-get update
+apt-get update -y
 apt-get install -y cuda 
 
 if [ ! -e archives/cudnn-7.0-linux-x64-v4.0-prod.tgz ] ; then
