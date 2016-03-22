@@ -4,17 +4,9 @@ set -e
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
 DOCKER=no
-while getopt --long docker opt; do
-    case $opt in
-        docker)
-            DOCKER=yes
-            ;;
-        \?)
-            echo "Invalid option: -$OPTARG; use -f to allow root execution." >&2
-            exit
-            ;;
-    esac
-done
+if [ "$1" == "--docker" ] ; then
+    DOCKER=yes
+fi
 
 if [[ $(/usr/bin/id -u) -ne 0 ]]; then
     echo "Run this script as root."
