@@ -4,11 +4,11 @@ set -e
 # Any subsequent(*) commands which fail will cause the shell script to exit immediately
 
 # allow -f to override the not-as-root check for use with the Dockerfile
-FORCE=no
-while getopts "f" opt; do
+DOCKER=no
+while getopt --long docker opt; do
     case $opt in
-        f)
-            FORCE=yes
+        docker)
+            DOCKER=yes
             ;;
         \?)
             echo "Invalid option: -$OPTARG; use -f to allow root execution." >&2
@@ -17,7 +17,7 @@ while getopts "f" opt; do
     esac
 done
 
-if [ $FORCE = "no" ] && [ $(/usr/bin/id -u) -eq 0 ]; then
+if [ $DOCKER = "no" ] && [ $(/usr/bin/id -u) -eq 0 ]; then
     echo "Do not run this script as root."
     exit
 fi
