@@ -20,6 +20,9 @@ apt-get update
 if [ $DOCKER = "no" ] ; then
     apt-get -y dist-upgrade
 fi
+#    linux-image-generic \
+#    libboost-all-dev \
+
 apt-get install -yq \
     gcc \
     g++ \
@@ -27,7 +30,6 @@ apt-get install -yq \
     build-essential \
     git \
     wget \
-    linux-image-generic \
     mosh \
     libopenblas-dev \
     python-dev \
@@ -42,7 +44,6 @@ apt-get install -yq \
     python3-scipy \
     emacs24-nox \
     libhdf5-serial-dev \
-    libboost-all-dev \
     htop \
     cmake
 
